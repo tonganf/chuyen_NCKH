@@ -1,0 +1,6 @@
+# This file ensures the models directory is tracked by Git
+# Place your trained model files here:
+# - arima_model.pkl
+# - svm_linear.pkl  
+# - svm_rbf.pkl
+# - scaler.pkl 

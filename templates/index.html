@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitcoin Price Prediction Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.umd.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo-section">
+                <i class="fab fa-bitcoin bitcoin-icon"></i>
+                <h1>Bitcoin Price Prediction Tool</h1>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Left Panel -->
+            <div class="left-panel">
+                <!-- Date Picker Section -->
+                <div class="section">
+                    <h3><i class="far fa-calendar-alt"></i> Date Range</h3>
+                    <div class="date-inputs">
+                        <div class="input-group">
+                            <label for="start-date">Start Date:</label>
+                            <input type="date" id="start-date" value="2024-06-01">
+                        </div>
+                        <div class="input-group">
+                            <label for="end-date">End Date:</label>
+                            <input type="date" id="end-date" value="2025-06-29">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Model Selection -->
+                <div class="section">
+                    <h3><i class="fas fa-brain"></i> Model Selection</h3>
+                    <div class="model-options">
+                        <div class="model-option" title="AutoRegressive Integrated Moving Average model for time series forecasting">
+                            <input type="checkbox" id="model-arima" value="arima" checked>
+                            <label for="model-arima">ARIMA</label>
+                            <i class="fas fa-info-circle tooltip-icon"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Source Options -->
+                <div class="section">
+                    <h3><i class="fas fa-database"></i> Data Source</h3>
+                    <div class="data-source-options">
+                        <div class="data-option">
+                            <input type="radio" id="api-source" name="data-source" value="api" checked>
+                            <label for="api-source">Use API (Binance)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="section">
+                    <div class="action-buttons">
+                        <button id="fetch-data-btn" class="btn btn-secondary">
+                            <i class="fas fa-download"></i> Fetch Data
+                        </button>
+                        <button id="predict-btn" class="btn btn-primary">
+                            <i class="fas fa-chart-line"></i> Predict
+                        </button>
+                        <button id="export-btn" class="btn btn-success" disabled>
+                            <i class="fas fa-file-export"></i> Export Results
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel -->
+            <div class="right-panel">
+                <!-- Chart Section -->
+                <div class="section chart-section">
+                    <h3><i class="fas fa-chart-area"></i> Price Chart & Predictions</h3>
+                    <div class="chart-container">
+                        <canvas id="price-chart"></canvas>
+                    </div>
+                    <div class="chart-loading" id="chart-loading">
+                        <!-- <i class="fas fa-spinner fa-spin"></i> -->
+                        <!-- <p>Loading data...</p> -->
+                    </div>
+                </div>
+
+                <!-- Performance Metrics -->
+                <div class="section metrics-section">
+                    <div class="metrics-container" id="performanceMetrics">
+                        <h3>📊 Performance Metrics</h3>
+                        <p class="text-muted">Make a prediction to see performance metrics.</p>
+                    </div>
+                </div>
+
+                <!-- Prediction Summary -->
+                <div class="section summary-section">
+                    <div class="summary-container" id="predictionSummary">
+                        <h3>🔮 Prediction Summary</h3>
+                        <p class="text-muted">Make a prediction to see summary.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-item">
+                <span class="status-label">Status:</span>
+                <span class="status-value" id="status-text">Ready</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Last Updated:</span>
+                <span class="status-value" id="last-updated">Never</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-content">
+            <i class="fas fa-spinner fa-spin fa-3x"></i>
+            <p>Processing your request...</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html> 

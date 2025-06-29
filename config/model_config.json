@@ -1,0 +1,23 @@
+{
+  "data_source": {
+    "symbol": "BTCUSDT",
+    "interval": "1d"
+  },
+  "models": {
+    "arima": {
+      "order": [
+        5,
+        1,
+        2
+      ]
+    },
+    "svm": {
+      "kernel": "rbf",
+      "C": 1.0
+    }
+  },
+  "preprocessing": {
+    "window_size": 4,
+    "stride": 1
+  }
+}
